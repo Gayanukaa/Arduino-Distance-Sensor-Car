@@ -18,11 +18,55 @@ long readUltrasonicDistance(int triggerPin, int echoPin)
 }
 
 void setup() {
-  // put your setup code here, to run once:
-
+  Serial.begin(9600);
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(IN3, OUTPUT);
+  pinMode(IN4, OUTPUT);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  forward()
+  distance = readUltrasonicDistance(3,2);
+  if (distance > 150) {      // determining distance
+    digitalWrite(6 ,HIGH);
+    digitalWrite(7, LOW);  
+    Serial.println("Come Closer");
+  } 
 
+}
+
+void forward(){
+  digitalWrite (IN1, HIGH); 
+  digitalWrite (IN4, HIGH); 
+  digitalWrite (IN2, LOW); 
+  digitalWrite (IN3, LOW);
+}
+
+void backward(){
+  digitalWrite (IN2, HIGH); 
+  digitalWrite (IN3, HIGH); 
+  digitalWrite (IN1, LOW); 
+  digitalWrite (IN4, LOW);
+}
+
+void right(){
+  digitalWrite (IN1, HIGH); 
+  digitalWrite (IN3, LOW); 
+  digitalWrite (IN2, LOW); 
+  digitalWrite (IN4, LOW);
+}
+
+void left(){
+  digitalWrite (IN4, HIGH); 
+  digitalWrite (IN3, LOW); 
+  digitalWrite (IN1, LOW); 
+  digitalWrite (IN2, LOW);
+}
+
+void stop(){
+  digitalWrite (IN4, LOW); 
+  digitalWrite (IN3, LOW); 
+  digitalWrite (IN1, LOW); 
+  digitalWrite (IN2, LOW);
 }
