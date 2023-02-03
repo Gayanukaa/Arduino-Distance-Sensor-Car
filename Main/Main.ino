@@ -4,8 +4,9 @@
 #define IN4 11
 
 long distance = 0;
+long turnDistance = 0;
 
-long readUltrasonicDistance(int triggerPin, int echoPin)
+long readUltrasonicDistance(int echoPin, int triggerPin)
 {
   pinMode(triggerPin, OUTPUT); 
   digitalWrite(triggerPin, LOW);
@@ -28,12 +29,35 @@ void setup() {
 void loop() {
   forward()
   distance = readUltrasonicDistance(3,2);
-  if (distance > 150) {      // determining distance
-    digitalWrite(6 ,HIGH);
-    digitalWrite(7, LOW);  
-    Serial.println("Come Closer");
-  } 
-
+  if (distance < 150) {      // determining distance
+    stop()
+    delay(500);
+    backward()
+    delay(500);
+    stop()
+    delay(500);
+    right()
+    delay(500);
+    turnDistance = readUltrasonicDistance(3,2);
+    if (turnDistance < 100) { 
+      stop()
+      delay(500);
+      left()
+      delay(500);
+      stop()
+      delay(500);
+      left()
+      delay(500);
+      turnDistance = readUltrasonicDistance(3,2);
+      if (turnDistance < 100) { 
+        stop()
+        delay(500);
+        left()
+        delay(500);
+        stop()
+      }
+    } 
+  }
 }
 
 void forward(){
