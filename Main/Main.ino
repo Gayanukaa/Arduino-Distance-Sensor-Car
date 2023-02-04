@@ -6,7 +6,7 @@
 long distance = 0;
 long turnDistance = 0;
 
-long readUltrasonicDistance(int echoPin, int triggerPin)
+long readUltrasonicDistance(int triggerPin, int echoPin)
 {
   pinMode(triggerPin, OUTPUT); 
   digitalWrite(triggerPin, LOW);
@@ -24,40 +24,6 @@ void setup() {
   pinMode(IN2, OUTPUT);
   pinMode(IN3, OUTPUT);
   pinMode(IN4, OUTPUT);
-}
-
-void loop() {
-  forward();
-  distance = readUltrasonicDistance(3,2);
-  if (distance < 150) {      // determining distance
-    stop();
-    delay(500);
-    backward();
-    delay(500);
-    stop();
-    delay(500);
-    right();
-    delay(500);
-    turnDistance = readUltrasonicDistance(3,2);
-    if (turnDistance < 100) { 
-      stop();
-      delay(500);
-      left();
-      delay(500);
-      stop();
-      delay(500);
-      left();
-      delay(500);
-      turnDistance = readUltrasonicDistance(3,2);
-      if (turnDistance < 100) { 
-        stop();
-        delay(500);
-        left();
-        delay(500);
-        stop();
-      }
-    } 
-  }
 }
 
 void forward(){
@@ -93,4 +59,38 @@ void stop(){
   digitalWrite (IN3, LOW); 
   digitalWrite (IN1, LOW); 
   digitalWrite (IN2, LOW);
+}
+
+void loop() {
+  forward();
+  distance = readUltrasonicDistance(3,2);
+  if (distance < 150) {      // determining distance
+    stop();
+    delay(500);
+    backward();
+    delay(500);
+    stop();
+    delay(500);
+    right();
+    delay(500);
+    turnDistance = readUltrasonicDistance(3,2);
+    if (turnDistance < 100) { 
+      stop();
+      delay(500);
+      left();
+      delay(500);
+      stop();
+      delay(500);
+      left();
+      delay(500);
+      turnDistance = readUltrasonicDistance(3,2);
+      if (turnDistance < 100) { 
+        stop();
+        delay(500);
+        left();
+        delay(500);
+        stop();
+      }
+    } 
+  }
 }
