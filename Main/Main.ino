@@ -27,34 +27,34 @@ void setup() {
 }
 
 void loop() {
-  forward()
+  forward();
   distance = readUltrasonicDistance(3,2);
   if (distance < 150) {      // determining distance
-    stop()
+    stop();
     delay(500);
-    backward()
+    backward();
     delay(500);
-    stop()
+    stop();
     delay(500);
-    right()
+    right();
     delay(500);
     turnDistance = readUltrasonicDistance(3,2);
     if (turnDistance < 100) { 
-      stop()
+      stop();
       delay(500);
-      left()
+      left();
       delay(500);
-      stop()
+      stop();
       delay(500);
-      left()
+      left();
       delay(500);
       turnDistance = readUltrasonicDistance(3,2);
       if (turnDistance < 100) { 
-        stop()
+        stop();
         delay(500);
-        left()
+        left();
         delay(500);
-        stop()
+        stop();
       }
     } 
   }
