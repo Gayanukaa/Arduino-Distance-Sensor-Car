@@ -25,6 +25,7 @@ void setup() {
   pinMode(IN2, OUTPUT);
   pinMode(IN3, OUTPUT);
   pinMode(IN4, OUTPUT);
+  status = true;
 }
 
 void loop() {
@@ -37,34 +38,34 @@ void loop() {
     }
   }
   stop();
-  delay(500);
+  delay(300);
   backward();
-  delay(500);
+  delay(100);
   stop();
   delay(500);
   right();
-  delay(500);
+  delay(600);
   turnDistance = readUltrasonicDistance(3,2);
   if (turnDistance < 20) { 
     stop();
-    delay(500);
+    delay(300);
     left();
-    delay(500);
+    delay(600);
     stop();
     delay(500);
     left();
-    delay(500);
+    delay(600);
     turnDistance = readUltrasonicDistance(3,2);
     if (turnDistance < 20) { 
       stop();
-      delay(500);
+      delay(300);
       left();
-      delay(500);
+      delay(600);
       stop();
       status = true;
     }
     status = true;
-  } 
+  }
   status = true;
 }
 
