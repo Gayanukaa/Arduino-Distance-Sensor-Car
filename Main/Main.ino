@@ -38,34 +38,40 @@ void loop() {
     }
   }
   stop();
-  delay(300);
-  backward();
+  delay(500);
+  reverse();
   delay(100);
   stop();
   delay(500);
-  right();
-  delay(600);
+  fwRight();
+  delay(550);
   turnDistance = readUltrasonicDistance(3,2);
-  if (turnDistance < 20) { 
+  if (turnDistance < 10) { 
     stop();
     delay(300);
-    left();
-    delay(600);
+    rvRight();
+    delay(550);
     stop();
     delay(500);
-    left();
-    delay(600);
+    fwLeft();
+    delay(550);
     turnDistance = readUltrasonicDistance(3,2);
-    if (turnDistance < 20) { 
+    if (turnDistance < 10) { 
       stop();
       delay(300);
-      left();
-      delay(600);
+      rvLeft();
+      delay(550);
+      stop();
+      delay(500);
+      turn();
+      delay(500);
       stop();
       status = true;
     }
+    delay(500);
     status = true;
   }
+  delay(500);
   status = true;
 }
 
@@ -76,23 +82,37 @@ void forward(){
   digitalWrite (IN3, LOW);
 }
 
-void backward(){
+void reverse(){
   digitalWrite (IN2, HIGH); 
   digitalWrite (IN3, HIGH); 
   digitalWrite (IN1, LOW); 
   digitalWrite (IN4, LOW);
 }
 
-void right(){
+void fwRight(){
   digitalWrite (IN1, HIGH); 
   digitalWrite (IN3, LOW); 
-  digitalWrite (IN2, LOW); 
+  digitalWrite (IN2, LOW);
   digitalWrite (IN4, LOW);
 }
 
-void left(){
+void fwLeft(){
   digitalWrite (IN4, HIGH); 
+  digitalWrite (IN3, LOW);
+  digitalWrite (IN1, LOW); 
+  digitalWrite (IN2, LOW);
+}
+
+void rvRight(){
+  digitalWrite (IN1, LOW); 
   digitalWrite (IN3, LOW); 
+  digitalWrite (IN2, HIGH);
+  digitalWrite (IN4, LOW);
+}
+
+void rvLeft(){
+  digitalWrite (IN4, LOW); 
+  digitalWrite (IN3, HIGH);
   digitalWrite (IN1, LOW); 
   digitalWrite (IN2, LOW);
 }
@@ -102,4 +122,11 @@ void stop(){
   digitalWrite (IN3, LOW); 
   digitalWrite (IN1, LOW); 
   digitalWrite (IN2, LOW);
+}
+
+void turn(){
+  digitalWrite (IN1, HIGH); 
+  digitalWrite (IN3, HIGH);
+  digitalWrite (IN2, LOW);
+  digitalWrite (IN4, LOW);
 }
