@@ -1,7 +1,7 @@
-#define IN1 8
-#define IN2 9
-#define IN3 10
-#define IN4 11
+#define IN1 11
+#define IN2 10
+#define IN3 6
+#define IN4 5
 
 long distance = 0;
 long turnDistance = 0;
@@ -76,57 +76,57 @@ void loop() {
 }
 
 void forward(){
-  digitalWrite (IN1, HIGH); 
-  digitalWrite (IN4, HIGH); 
-  digitalWrite (IN2, LOW); 
-  digitalWrite (IN3, LOW);
+  analogWrite (IN1, 200); //HIGH
+  analogWrite (IN4, 200); //HIGH
+  analogWrite (IN2, 0); 
+  analogWrite (IN3, 0);
 }
 
 void reverse(){
-  digitalWrite (IN2, HIGH); 
-  digitalWrite (IN3, HIGH); 
-  digitalWrite (IN1, LOW); 
-  digitalWrite (IN4, LOW);
+  analogWrite (IN2, 250); //HIGH
+  analogWrite (IN3, 250); //HIGH
+  analogWrite (IN1, 0); 
+  analogWrite (IN4, 0);
 }
 
 void fwRight(){
-  digitalWrite (IN1, HIGH); 
-  digitalWrite (IN3, LOW); 
-  digitalWrite (IN2, LOW);
-  digitalWrite (IN4, LOW);
+  analogWrite (IN1, 150); //HIGH
+  analogWrite (IN3, 0); 
+  analogWrite (IN2, 0);
+  analogWrite (IN4, 0);
 }
 
 void fwLeft(){
-  digitalWrite (IN4, HIGH); 
-  digitalWrite (IN3, LOW);
-  digitalWrite (IN1, LOW); 
-  digitalWrite (IN2, LOW);
+  analogWrite (IN4, 150); //HIGH 
+  analogWrite (IN3, 0);
+  analogWrite (IN1, 0); 
+  analogWrite (IN2, 0);
 }
 
 void rvRight(){
-  digitalWrite (IN1, LOW); 
-  digitalWrite (IN3, LOW); 
-  digitalWrite (IN2, HIGH);
-  digitalWrite (IN4, LOW);
+  analogWrite (IN2, 150); //HIGH
+  analogWrite (IN1, 0); 
+  analogWrite (IN3, 0); 
+  analogWrite (IN4, 0);
 }
 
 void rvLeft(){
-  digitalWrite (IN4, LOW); 
-  digitalWrite (IN3, HIGH);
-  digitalWrite (IN1, LOW); 
-  digitalWrite (IN2, LOW);
+  analogWrite (IN3, 150); //HIGH
+  analogWrite (IN1, 0); 
+  analogWrite (IN2, 0);
+  analogWrite (IN4, 0); 
 }
 
 void stop(){
-  digitalWrite (IN4, LOW); 
-  digitalWrite (IN3, LOW); 
-  digitalWrite (IN1, LOW); 
-  digitalWrite (IN2, LOW);
+  analogWrite (IN4, 0); 
+  analogWrite (IN3, 0); 
+  analogWrite (IN1, 0); 
+  analogWrite (IN2, 0);
 }
 
 void turn(){
-  digitalWrite (IN1, HIGH); 
-  digitalWrite (IN3, HIGH);
-  digitalWrite (IN2, LOW);
-  digitalWrite (IN4, LOW);
+  analogWrite (IN1, 150); //HIGH
+  analogWrite (IN3, 150); //HIGH
+  analogWrite (IN2, 0);
+  analogWrite (IN4, 0);
 }
