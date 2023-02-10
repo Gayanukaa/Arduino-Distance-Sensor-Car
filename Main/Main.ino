@@ -1,22 +1,27 @@
-#define IN1 8
-#define IN2 9
-#define IN3 10
-#define IN4 11
+#define IN1 11
+#define IN2 10
+#define IN3 6
+#define IN4 5
 
-long distance = 0;
-long turnDistance = 0;
+long leftDistance = 0; //from left sensor
+long fwdDistance = 0; //from middle sensor
+long rightDistance = 0; //from right sensor
 bool status = true;
+
+// leftSensor = readUltrasonicDistance(7,4);
+// middleSensor = readUltrasonicDistance(3,2);
+// rightSensor = readUltrasonicDistance(9,8);
 
 long readUltrasonicDistance(int triggerPin, int echoPin)
 {
-  pinMode(triggerPin, OUTPUT); 
+  pinMode(triggerPin, OUTPUT);
   digitalWrite(triggerPin, LOW);
   delayMicroseconds(2);
   digitalWrite(triggerPin, HIGH);
   delayMicroseconds(10);
   digitalWrite(triggerPin, LOW);
   pinMode(echoPin, INPUT);
-  return (pulseIn(echoPin, HIGH)*0.01723);
+  return (pulseIn(echoPin, HIGH) * 0.01723);
 }
 
 void setup() {
@@ -29,10 +34,12 @@ void setup() {
 }
 
 void loop() {
-  while(true){
+  while (true) {
     forward();
-    distance = readUltrasonicDistance(3,2);
-    if (distance < 20){
+    fwdDistance = readUltrasonicDistance(3, 2);
+    leftDistance = readUltrasonicDistance(7, 4);
+    rightDistance = readUltrasonicDistance(9, 8);
+    if (fwdDistance < 20 || leftDistance < 5 || rightDistance < 5) {
       status = false;
       break;
     }
@@ -40,93 +47,93 @@ void loop() {
   stop();
   delay(500);
   reverse();
-  delay(100);
+  delay(250);
   stop();
   delay(500);
   fwRight();
   delay(550);
-  turnDistance = readUltrasonicDistance(3,2);
-  if (turnDistance < 10) { 
+  fwdDistance = readUltrasonicDistance(3, 2);
+  rightDistance = readUltrasonicDistance(9, 8);
+  if (fwdDistance < 15 || rightDistance < 8) {
     stop();
-    delay(300);
+    delay(500);
     rvRight();
     delay(550);
     stop();
     delay(500);
     fwLeft();
     delay(550);
-    turnDistance = readUltrasonicDistance(3,2);
-    if (turnDistance < 10) { 
+    fwdDistance = readUltrasonicDistance(3, 2);
+    leftDistance = readUltrasonicDistance(7, 4);
+    if (fwdDistance < 15 || leftDistance < 8) {
       stop();
-      delay(300);
+      delay(500);
       rvLeft();
       delay(550);
       stop();
       delay(500);
-      turn();
+      turn360();
       delay(500);
       stop();
-      status = true;
     }
-    delay(500);
-    status = true;
+    delay(300);
   }
-  delay(500);
+  delay(300);
   status = true;
 }
 
-void forward(){
-  digitalWrite (IN1, HIGH); 
-  digitalWrite (IN4, HIGH); 
-  digitalWrite (IN2, LOW); 
-  digitalWrite (IN3, LOW);
+void forward() {
+  analogWrite (IN1, 175); //HIGH
+  analogWrite (IN4, 175); //HIGH
+  analogWrite (IN2, 0);
+  analogWrite (IN3, 0);
 }
 
-void reverse(){
-  digitalWrite (IN2, HIGH); 
-  digitalWrite (IN3, HIGH); 
-  digitalWrite (IN1, LOW); 
-  digitalWrite (IN4, LOW);
+void reverse() {
+  analogWrite (IN2, 200); //HIGH
+  analogWrite (IN3, 200); //HIGH
+  analogWrite (IN1, 0);
+  analogWrite (IN4, 0);
 }
 
-void fwRight(){
-  digitalWrite (IN1, HIGH); 
-  digitalWrite (IN3, LOW); 
-  digitalWrite (IN2, LOW);
-  digitalWrite (IN4, LOW);
+void stop() {
+  analogWrite (IN4, 0);
+  analogWrite (IN3, 0);
+  analogWrite (IN1, 0);
+  analogWrite (IN2, 0);
 }
 
-void fwLeft(){
-  digitalWrite (IN4, HIGH); 
-  digitalWrite (IN3, LOW);
-  digitalWrite (IN1, LOW); 
-  digitalWrite (IN2, LOW);
+void fwRight() {
+  analogWrite (IN1, 175); //HIGH
+  analogWrite (IN3, 0);
+  analogWrite (IN2, 0);
+  analogWrite (IN4, 0);
 }
 
-void rvRight(){
-  digitalWrite (IN1, LOW); 
-  digitalWrite (IN3, LOW); 
-  digitalWrite (IN2, HIGH);
-  digitalWrite (IN4, LOW);
+void fwLeft() {
+  analogWrite (IN4, 175); //HIGH
+  analogWrite (IN3, 0);
+  analogWrite (IN1, 0);
+  analogWrite (IN2, 0);
 }
 
-void rvLeft(){
-  digitalWrite (IN4, LOW); 
-  digitalWrite (IN3, HIGH);
-  digitalWrite (IN1, LOW); 
-  digitalWrite (IN2, LOW);
+void rvRight() {
+  analogWrite (IN2, 175); //HIGH
+  analogWrite (IN1, 0);
+  analogWrite (IN3, 0);
+  analogWrite (IN4, 0);
 }
 
-void stop(){
-  digitalWrite (IN4, LOW); 
-  digitalWrite (IN3, LOW); 
-  digitalWrite (IN1, LOW); 
-  digitalWrite (IN2, LOW);
+void rvLeft() {
+  analogWrite (IN3, 175); //HIGH
+  analogWrite (IN1, 0);
+  analogWrite (IN2, 0);
+  analogWrite (IN4, 0);
 }
 
-void turn(){
-  digitalWrite (IN1, HIGH); 
-  digitalWrite (IN3, HIGH);
-  digitalWrite (IN2, LOW);
-  digitalWrite (IN4, LOW);
+void turn360() {
+  analogWrite (IN1, 175); //HIGH
+  analogWrite (IN3, 175); //HIGH
+  analogWrite (IN2, 0);
+  analogWrite (IN4, 0);
 }
