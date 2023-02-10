@@ -39,7 +39,7 @@ void loop() {
     fwdDistance = readUltrasonicDistance(3, 2);
     leftDistance = readUltrasonicDistance(7, 4);
     rightDistance = readUltrasonicDistance(9, 8);
-    if (fwdDistance < 25 || leftDistance < 25 && rightDistance < 25) {
+    if (fwdDistance < 20 || leftDistance < 5 || rightDistance < 5) {
       status = false;
       break;
     }
@@ -47,14 +47,14 @@ void loop() {
   stop();
   delay(500);
   reverse();
-  delay(100);
+  delay(250);
   stop();
   delay(500);
   fwRight();
   delay(550);
   fwdDistance = readUltrasonicDistance(3, 2);
   rightDistance = readUltrasonicDistance(9, 8);
-  if (fwdDistance < 10 || rightDistance < 8) {
+  if (fwdDistance < 15 || rightDistance < 8) {
     stop();
     delay(500);
     rvRight();
@@ -65,7 +65,7 @@ void loop() {
     delay(550);
     fwdDistance = readUltrasonicDistance(3, 2);
     leftDistance = readUltrasonicDistance(7, 4);
-    if (fwdDistance < 10 || leftDistance < 8) {
+    if (fwdDistance < 15 || leftDistance < 8) {
       stop();
       delay(500);
       rvLeft();
@@ -76,22 +76,22 @@ void loop() {
       delay(500);
       stop();
     }
-    delay(500);
+    delay(300);
   }
-  delay(500);
+  delay(300);
   status = true;
 }
 
 void forward() {
-  analogWrite (IN1, 200); //HIGH
-  analogWrite (IN4, 200); //HIGH
+  analogWrite (IN1, 175); //HIGH
+  analogWrite (IN4, 175); //HIGH
   analogWrite (IN2, 0);
   analogWrite (IN3, 0);
 }
 
 void reverse() {
-  analogWrite (IN2, 250); //HIGH
-  analogWrite (IN3, 250); //HIGH
+  analogWrite (IN2, 200); //HIGH
+  analogWrite (IN3, 200); //HIGH
   analogWrite (IN1, 0);
   analogWrite (IN4, 0);
 }
@@ -104,36 +104,36 @@ void stop() {
 }
 
 void fwRight() {
-  analogWrite (IN1, 150); //HIGH
+  analogWrite (IN1, 175); //HIGH
   analogWrite (IN3, 0);
   analogWrite (IN2, 0);
   analogWrite (IN4, 0);
 }
 
 void fwLeft() {
-  analogWrite (IN4, 150); //HIGH
+  analogWrite (IN4, 175); //HIGH
   analogWrite (IN3, 0);
   analogWrite (IN1, 0);
   analogWrite (IN2, 0);
 }
 
 void rvRight() {
-  analogWrite (IN2, 150); //HIGH
+  analogWrite (IN2, 175); //HIGH
   analogWrite (IN1, 0);
   analogWrite (IN3, 0);
   analogWrite (IN4, 0);
 }
 
 void rvLeft() {
-  analogWrite (IN3, 150); //HIGH
+  analogWrite (IN3, 175); //HIGH
   analogWrite (IN1, 0);
   analogWrite (IN2, 0);
   analogWrite (IN4, 0);
 }
 
 void turn360() {
-  analogWrite (IN1, 125); //HIGH
-  analogWrite (IN3, 125); //HIGH
+  analogWrite (IN1, 175); //HIGH
+  analogWrite (IN3, 175); //HIGH
   analogWrite (IN2, 0);
   analogWrite (IN4, 0);
 }
