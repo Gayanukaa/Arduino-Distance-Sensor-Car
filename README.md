@@ -21,12 +21,9 @@ Execute file to run
  - Battery Casing
  - Jumper wires
  
-<!-- 
-## Project
+## Project Highlights
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
-To update -->
+<img src="https://github.com/Gayanukaa/Arduino-Distance-Sensor-Car/blob/main/Media/Tinkercad%20Circuit%20Design.png" alt="Circuit Design" width="556" height="350">
 
 ## Contributing
 
